@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>View Flight Info</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">Public Search Flight</h1>
+    </div>
+
+
+
+    <div class="search1" style="text-align: center">
+      <form action="/publicSearchFlight" method="POST">
+      <h2><u>Search for upcoming flights</u></h2>
+      <label for="depart_city_or_airport">Departure Airport Name/ City Name</label> <br>
+      <input type="text" name="depart_city_or_airport" value="" > <br><br>
+      <label for="arrive_city_or_airport">Arrival Airport Name/ City Name</label> <br>
+      <input type="text" name="arrive_city_or_airport" value="" > <br><br>
+      <label for="departure_date">Departure Date</label> <br>
+      <input type="date" name="departure_date" value=""> <br><br>
+      <label for="arrival_date">Arrival Date</label> <br>
+      <input type="date" name="arrival_date" value=""> <br><br>
+      <button type="submit" name="button" class="button button1">Search</button>
+      </form>
+
+
+    {% if flights %}
+        <div class="showflights">
+            <h2 style="text-align: center">Search results</h2>
+            <table>
+              <!--<caption>My Upcoming Flights</caption>-->
+              <tr>
+                <th>Flight Number</th>
+                <th>Airline Name</th>
+                <th>Airplane ID</th>
+                <th>Depature Airport</th>
+                <th>Arrival Airport</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Price</th>
+              </tr>
+
+              {% for flight in flights %}
+              <tr>
+                <td>{{flight.flight_num}}</td>
+                <td>{{flight.airline_name}}</td>
+                <td>{{flight.airplane_id}}</td>
+                <td>{{flight.departure_airport}}</td>
+                <td>{{flight.arrival_airport}}</td>
+                <td>{{flight.departure_time}}</td>
+                <td>{{flight.arrival_time}}</td>
+                <td>{{flight.price}}</td>
+              </tr>
+              {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+    {% if no_flight %}
+      <h4 style="text-align: center; color: firebrick">No Upcoming Flights of based on your search</h4>
+    {% endif %}
+    </div>
+
+    <div class="search2" style="text-align: center">
+      <form action="/publicSearchFlightStatus" method="POST">
+      <h2><u>Search for flights status</u></h2>
+      <label for="f_n">Flight Number</label> <br>
+      <input type="text" name="f_n" value=""> <br><br>
+      <label for="departure_date">Departure Date</label><br>
+      <input type="date" name="departure_date" value=""><br><br>
+      <label for="arrival_date">Arrival Date</label><br>
+      <input type="date" name="arrival_date" value=""><br><br>
+      <button type="submit" name="button" class="button button1">Search</button>
+
+      {% if error2 %}
+      <h2 class="text-danger"><strong>No Result:</strong> {{error2}}</h2>
+      {% endif %}
+
+      {% if flights_status %}
+      <table>
+        <tr>
+            <th >Airline Name</th>
+            <th>Flight Num</th>
+            <th>Airplane ID</th>
+            <th>Status</th>
+        </tr>
+
+        {% for flight in flights_status %}
+        <tr>
+            <td>{{flight.airline_name}}</td>
+            <td>{{flight.flight_num}}</td>
+            <td>{{flight.airplane_id}}</td>
+            <td>{{flight.status}}</td>-
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+      </form>
+    </div>
+  </body>
+</html>

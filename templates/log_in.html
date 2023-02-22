@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <style media="screen">
+    .toprow{
+      height:200px;
+      background-color:rgb(0,204,204);
+      background-repeat:no-repeat;
+    }
+    .topimage{
+      height:200px;
+      width:auto;
+      float=left;
+      border-radius: 50px;
+    }
+    .topwords{
+      position:absolute;
+      left:250px;
+      top:50px;
+    }
+    .icon{
+      width:200px;
+      height:auto;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">Log In As:</h1>
+    </div>
+    <div style="text-align: center">
+      <a href="{{ url_for('c_login') }}">
+        <img src="static/customer.jpeg" alt="Customer" class="icon">
+      </a>
+      <a href="{{ url_for('b_login') }}">
+        <img src="static/booking_A.png" alt="Booking Agent" class="icon">
+      </a>
+      <a href="{{ url_for('a_login') }}">
+        <img src="static/Airline_S.jpeg" alt="Airline Staff" class="icon">
+      </a>
+      </div>
+
+  </body>
+</html>

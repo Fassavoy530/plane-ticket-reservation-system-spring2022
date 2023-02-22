@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <style media="screen">
+      .toprow{
+        height:200px;
+        background-color:rgb(0,204,204);
+        background-repeat:no-repeat;
+      }
+      .topimage{
+        height:200px;
+        width:auto;
+        float=left;
+        border-radius: 50px;
+      }
+      .topwords{
+        position:absolute;
+        left:250px;
+        top:50px;
+      }
+      .button{
+        border: none;
+        color:white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16;
+        margin: 4px 2px;
+        transition-duration: 0.45s;
+        cursor: pointer;
+      }
+      .button1{
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50;
+      }
+      .button1:hover{
+        background-color: #4CAF50;
+        color:white;
+      }
+      div{
+        margin-top:5px
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">Register as a Airline Staff!</h1>
+    </div>
+    <div class="info">
+    <form action="/aregisterAuth" method="POST">
+      <center>
+        <h3>
+      <label for="username">Username</label>
+      <input type="text" name="username" value="" required>
+    </h3>
+    <h3>
+      <label for="password">Password</label>
+      <input type="text" name="password" value="" required>
+    </h3>
+    <h3>
+      <label for="f_name">First Name</label>
+      <input type="text" name="f_name" value="" required>
+    </h3>
+    <h3>
+      <label for="l_name">Last Name</label>
+      <input type="text" name="l_name" value="" required>
+    </h3>
+    <h3>
+      <label for="DOB">Date of Birth</label>
+      <input type="date" name="DOB" value="" required>
+    </h3>
+    <h3>
+      <label for="a_name">Airline Name</label>
+      <input type="text" name="a_name" value="" required>
+    </h3>
+    <a href="sign_in.html">
+      <button type="submit" name="button" class="button button1">Submit</button>
+    </a>
+    </center>
+    <form>
+
+    {% if error %}
+      <h4 style="color: firebrick; text-align: center">{{error}}</h4>
+    {% endif %}
+
+    {% if error1 %}
+      <h4 style="color: firebrick; text-align: center">{{error1}}</h4>
+    {% endif %}
+    </div>
+  </body>
+</html>

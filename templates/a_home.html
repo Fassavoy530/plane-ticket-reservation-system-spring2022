@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Airline Staff Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+      function Message(){ alert ("Successfully updated");}
+    </script>
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">Welcome Airline Staff of {{airline_name}}!</h1>
+    </div>
+
+    <div class="links">
+      <center>
+        <a href="{{ url_for('a_home') }}">Home</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_view') }}">View my Flights</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_change_create_flights') }}">Create New Flights & Change Status</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_add_airplane_airport') }}">Add Airplane & Airport</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_view_booking_agent') }}">View Booking Agents</a> <br>
+        <a href="{{ url_for('a_view_customer') }}">View Frequent Consumers</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_report') }}">View Tickets Reports</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_revenue') }}">Revenue Comparison</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_destination') }}">View Top Destination</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_permission') }}">Grant Permissions</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_add_booking_agent') }}">Add Booking Agent</a> &nbsp | &nbsp
+        <a href="/logout">Log Out</a>
+      </center>
+    </div>
+
+    <!--Show Upcoming flights booking agent bought for customers-->
+    <h1 style="text-align: center">Upcoming flights of {{airline_name}} in the next 30 dyas</h1>
+    {% if flights %}
+    <table>
+      <!--<caption>My Upcoming Flights</caption>-->
+      <tr>
+        <th>Flight Number</th>
+        <th>Airline Name</th>
+        <th>Airplane ID</th>
+        <th>Depature Airport</th>
+        <th>Arrival Airport</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Price</th>
+      </tr>
+
+      {% for flight in flights %}
+      <tr>
+        <td>{{flight.flight_num}}</td>
+        <td>{{flight.airline_name}}</td>
+        <td>{{flight.airplane_id}}</td>
+        <td>{{flight.departure_airport}}</td>
+        <td>{{flight.arrival_airport}}</td>
+        <td>{{flight.departure_time}}</td>
+        <td>{{flight.arrival_time}}</td>
+        <td>{{flight.price}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    {% else %}
+      <h2 style="text-align: center">No Upcoming Flights of {{airline_name}} in the next 30 days</h2>
+    {% endif %}
+
+    <p style="text-align: center; color:#525050">To search for specific flights/ customers list on a specific flight, please click on View My Flights on the top bar</p>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add Booking Agent</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">Add Booking Agent</h1>
+    </div>
+
+    <div class="links">
+      <center>
+        <a href="{{ url_for('a_home') }}">Home</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_view') }}">View my Flights</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_change_create_flights') }}">Create New Flights & Change Status</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_add_airplane_airport') }}">Add Airplane & Airport</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_view_booking_agent') }}">View Booking Agents</a> <br>
+        <a href="{{ url_for('a_view_customer') }}">View Frequent Consumers</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_report') }}">View Tickets Reports</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_revenue') }}">Revenue Comparison</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_destination') }}">View Top Destination</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_permission') }}">Grant Permissions</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_add_booking_agent') }}">Add Booking Agent</a> &nbsp | &nbsp
+        <a href="/logout">Log Out</a>
+      </center>
+    </div>
+
+    <div style="text-align: center">
+      {% if error %}
+      <h2 style="color: firebrick">{{error}}</h2>
+      {% endif %}
+    </div>
+
+    {% if data %}
+    <div style="text-align: center">
+        <h2><u>Add New Booking Agent for {{airline}}</u></h2>
+        <form action="/aaddagentstart" method="POST">
+
+        <label for="booking_agent_email">Booking Agent Email</label> <br>
+        <input type="text" name="booking_agent_email" value="" required> <br><br>
+
+        <button type="Search" name="button" class="button button1">Submit</button>
+        </form>
+
+
+        {% if error1 %}
+            <h4 style="color: firebrick">{{error1}}</h4>
+        {% endif %}
+
+        {% if error2 %}
+            <h4 style="color: firebrick">{{error2}}</h4>
+        {% endif %}
+
+
+        {% if message %}
+            <h4 style="color: #168107">{{message}}</h4>
+        {% endif %}
+    </div>
+    {% endif %}

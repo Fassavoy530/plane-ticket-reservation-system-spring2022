@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Commission</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="toprow">
+        <a href="{{ url_for('home_page') }}">
+        <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+        </a>
+        <h1 class="topwords">My Commission</h1>
+    </div>
+
+    <div class="links">
+        <center>
+            <a href="{{ url_for('b_home') }}">Home</a> &nbsp | &nbsp
+            <a href="{{ url_for('b_view') }}">View My Flights</a> &nbsp | &nbsp
+            <a href="{{ url_for('b_search_purchase') }}">Search for Flights & Purchase Tickets</a> &nbsp | &nbsp
+            <a href="{{ url_for('b_commission') }}">View my Commission</a> &nbsp | &nbsp
+            <a href="{{ url_for('b_topcustomer') }}">View Top5 Customers</a> &nbsp | &nbsp
+            <a href="/logout">Log Out</a>
+        </center>
+    </div>
+
+  <div style="text-align: center">
+      <h2><u>My commission in the past 30 days</u></h2> <br>
+      <h3>Total:</h3> {{total_comm}} $ <br>
+      <h3>Average:</h3> {{avg_comm}} $<br>
+      <h3>Tickets Sold: </h3> {{total_tickets}} <br>
+  </div>
+
+  <div style="text-align: center">
+      <form action="/bcommissionwdate" method="POST">
+      <h2><u>Please specify a range of days to view commission and tickets</u></h2> <br>
+      <label for="start_date">Starting Data</label> <br>
+      <input type="date" name="start_date" value="" required> <br><br>
+      <label for="end_date">Ending Data</label> <br>
+      <input type="date" name="end_date" value="" required> <br><br>
+
+      <button type="Search" name="button" class="button button1">Search</button>
+      </form>
+
+      {% if comm %}
+      <h2><u>My commission between {{start}} and {{end}}</u></h2> <br>
+      <h3>Total:</h3> {{total_comm1}} $ <br>
+      <h3>Average:</h3> {{avg_comm1}} $<br>
+      <h3>Tickets Sold: </h3> {{total_tickets1}} <br>
+      {% endif %}
+  </div>
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Booking_Agent Log in</title>
+    <style media="screen">
+    .toprow{
+      height:200px;
+      background-color:rgb(0,204,204);
+      background-repeat:no-repeat;
+    }
+    .topimage{
+      height:200px;
+      width:auto;
+      float=left;
+      border-radius: 50px;
+    }
+    .topwords{
+      position:absolute;
+      left:250px;
+      top:50px;
+    }
+    .welcomesign{
+      height:100px;
+      border-radius: 100px;
+      float:center;
+    }
+    div{
+      margin-top: 5px;
+    }
+    .barwords{
+      font-family: fantasy;
+    }
+    .button{
+      border: none;
+      color:white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16;
+      margin: 4px 2px;
+      transition-duration: 0.45s;
+      cursor: pointer;
+    }
+    .button1{
+      background-color: white;
+      color: black;
+      border: 2px solid #4CAF50;
+    }
+    .button1:hover{
+      background-color: #4CAF50;
+      color:white;
+    }
+    </style>
+    <script>
+      function Myfunction(){alert ("Log in failed");}
+    </script>
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">Please Log in for more functions!</h1>
+    </div>
+    <div class="bar">
+      <center>
+      <img src="static/hello.png" alt="this is a welcoming sign" class="welcomesign">
+      <h1 class="barwords">Log In</h1>
+    </center>
+    </div>
+
+    <div class="login" style="text-align: center">
+      <form action="/bloginAuth" method="POST">
+      <h3>
+      <label for="email">Email</label>
+      <input type="text" name="email" value="">
+      </h3>
+      <h3>
+      <label for="psw">Password</label>
+      <input type="password" name="psw" value="">
+      </h3>
+      <button type="submit" name="button" class="button button1">Log in</button>
+      </form>
+    </div>
+
+    {% if error %}
+      <h4 style="color: firebrick; text-align: center">{{error}}</h4>
+    {% endif %}
+
+  </body>
+</html>

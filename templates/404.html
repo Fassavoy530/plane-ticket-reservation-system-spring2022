@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>404</title>
+</head>
+<body>
+    <div class="toprow">
+      <div style="text-align: center;">
+        <a href="{{ url_for('home_page') }}">HOME</a>
+        |
+        <a href="{{ url_for('login') }}">LOGIN</a>
+        |
+        <a href="{{ url_for('register') }}">REGISTER</a>
+      </div>
+    </div>
+
+
+    <div style="text-align: center;">
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        <h1 class="text-danger">404</h1>
+        <h2>You are lost. <br> Please go back home or register or login again!</h2>
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Comparison of Revenue</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">Comparison of Revenue</h1>
+    </div>
+
+    <div class="links">
+      <center>
+        <a href="{{ url_for('a_home') }}">Home</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_view') }}">View my Flights</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_change_create_flights') }}">Create New Flights & Change Status</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_add_airplane_airport') }}">Add Airplane & Airport</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_view_booking_agent') }}">View Booking Agents</a> <br>
+        <a href="{{ url_for('a_view_customer') }}">View Frequent Consumers</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_report') }}">View Tickets Reports</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_revenue') }}">Revenue Comparison</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_destination') }}">View Top Destination</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_permission') }}">Grant Permissions</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_add_booking_agent') }}">Add Booking Agent</a> &nbsp | &nbsp
+        <a href="/logout">Log Out</a>
+      </center>
+    </div>
+
+    <div style="text-align: center">
+      <form action="/arevenueshow" method="POST">
+        <div style="text-align: center">
+          <label for="time"><h2><u>Revenue Comparison of {{airline_name}} Based On</u></h2> <br></label>
+          <select name = "time"  id="select_way" onchange="showDiv('select_date', this)" style="width: auto; height: 60px">
+            <option value="month">Last Month</option>
+            <option value="year">Last Year</option>
+          </select> <br><br>
+          <button type="Search" name="button" class="button button1">Search</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Last MONTH revenue -->
+    {% if error1 %}
+            <h4 style="color: firebrick; text-align: center">{{error1}}</h4>
+    {% endif %}
+
+    {% if r_month_cus %}}
+      <div style="text-align: center">
+        <div id="container" style="text-align: center; width: 800px; height: 500px;" align="center">
+          <script>
+            const customer_revenue = {{r_month_cus|safe}}
+            const agent_revenue = {{r_month_agent|safe}}
+            anychart.onDocumentReady(function () {
+                // Creates Pie chart.
+                var chart = anychart.pie([
+                    {x: 'Customer Revenue', value: customer_revenue},
+                    {x: 'Agent Revenue', value: agent_revenue},
+                ]);
+
+                chart.title('Revenue Comparison in the last month');
+                chart.container('container');
+                chart.draw();
+            });
+          </script>
+        </div>
+
+
+
+      </div>
+    {% endif %}
+
+    <!-- Last YEAR revenue -->
+    {% if error %}
+            <h4 style="color: firebrick; text-align: center">{{error}}</h4>
+    {% endif %}
+
+    {% if r_year_cus %}
+      <div style="text-align: center">
+        <div id="container" style="text-align: center; width: 800px; height: 500px;" align="center">
+          <script>
+            const customer_revenue = {{r_year_cus|safe}}
+            const agent_revenue = {{r_year_agent|safe}}
+            anychart.onDocumentReady(function () {
+                // Creates Pie chart.
+                var chart = anychart.pie([
+                    {x: 'Customer Revenue', value: customer_revenue},
+                    {x: 'Agent Revenue', value: agent_revenue},
+                ]);
+
+                chart.title('Revenue Comparison in the last year');
+                chart.container('container');
+                chart.draw();
+            });
+          </script>
+        </div>
+      </div>
+    {% endif %}

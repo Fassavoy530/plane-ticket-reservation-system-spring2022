@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>View Customers</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">View Customers</h1>
+    </div>
+
+    <div class="links">
+      <center>
+        <a href="{{ url_for('a_home') }}">Home</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_view') }}">View my Flights</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_change_create_flights') }}">Create New Flights & Change Status</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_add_airplane_airport') }}">Add Airplane & Airport</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_view_booking_agent') }}">View Booking Agents</a> <br>
+        <a href="{{ url_for('a_view_customer') }}">View Frequent Consumers</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_report') }}">View Tickets Reports</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_revenue') }}">Revenue Comparison</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_destination') }}">View Top Destination</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_permission') }}">Grant Permissions</a> &nbsp | &nbsp
+        <a href="{{ url_for('a_add_booking_agent') }}">Add Booking Agent</a> &nbsp | &nbsp
+        <a href="/logout">Log Out</a>
+      </center>
+    </div>
+
+    <!-- Mosst frequent customers -->
+    <div style="text-align: center">
+      <h3 style="text-align: center"> Most frequent customer(s) in the past year </h3>
+      {% if error1 %}
+        <h4 style="color: firebrick">{{error1}}</h4>
+      {% endif %}
+      {% if frequent_cus %}
+        <table>
+          <tr>
+              <th>Customer Email</th>
+              <th>Tickets Bought</th>
+          </tr>
+      {% endif %}
+
+      {% for customer in frequent_cus %}
+          <tr>
+              <td>{{customer['customer_email']}}</td>
+              <td>{{customer['ticket']}}</td>
+          </tr>
+      {% endfor %}
+        </table>
+    </div>
+
+    <!-- Search for certain customer's flight -->
+    <div style="text-align: center">
+      <h3>Search for Certain Customer's Flight</h3>
+      <form action="/aviewcustomerflight" method="POST">
+      <label for="customer_email">Customer Email</label> <br>
+      <input type="text" name="customer_email" value="" required> <br><br>
+      <button type="Search" name="button" class="button button1">Search</button>
+
+      {% if error %}
+        <h4 style="color: firebrick">{{error}}</h4>
+      {% endif %}
+
+
+      {% if error2 %}
+        <h4 style="color: firebrick">{{error2}}</h4>
+      {% endif %}
+
+
+      {% if customer_flight %}
+        <table>
+          <tr>
+              <th>Customer Email</th>
+              <th>Airline Name</th>
+              <th>Flight Number</th>
+              <th>Ticket ID</th>
+              <th>Airplane ID</th>
+              <th>Departure Time</th>
+              <th>Arrival Time</th>
+              <th>Departure Airport</th>
+              <th>Arrival Airport</th>
+              <th>Price</th>
+          </tr>
+      {% endif %}
+
+      {% for flight in customer_flight %}
+          <tr>
+              <td>{{flight['customer_email']}}</td>
+              <td>{{flight['airline_name']}}</td>
+              <td>{{flight['flight_num']}}</td>
+              <td>{{flight['ticket_id']}}</td>
+              <td>{{flight['airplane_id']}}</td>
+              <td>{{flight['departure_time']}}</td>
+              <td>{{flight['arrival_time']}}</td>
+              <td>{{flight['departure_airport']}}</td>
+              <td>{{flight['arrival_airport']}}</td>
+              <td>{{flight['price']}}</td>
+          </tr>
+      {% endfor %}
+        </table>
+    </div>
+
+

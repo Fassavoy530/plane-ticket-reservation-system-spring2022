@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Booking Agent Home</title>
+    <style media="screen">
+      .toprow{
+        height:200px;
+        background-color:rgb(0,204,204);
+        background-repeat:no-repeat;
+      }
+      .topimage{
+        height:200px;
+        width:auto;
+        float=left;
+        border-radius: 50px;
+      }
+      .topwords{
+        position:absolute;
+        left:250px;
+        top:50px;
+      }
+      .links{
+        height:30px;
+        width:auto;
+        background-color:rgb(0,128,255);
+        background-repeat:no-repeat;
+        margin-top: 5px;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="toprow">
+        <a href="{{ url_for('home_page') }}">
+        <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+        </a>
+        <h1 class="topwords">Welcome Booking Agent</h1>
+    </div>
+
+    <div class="links">
+        <center>
+            <a href="{{ url_for('b_home') }}">Home</a> &nbsp | &nbsp
+            <a href="{{ url_for('b_view') }}">View My Flights</a> &nbsp | &nbsp
+            <a href="{{ url_for('b_search_purchase') }}">Search for Flights & Purchase Tickets</a> &nbsp | &nbsp
+            <a href="{{ url_for('b_commission') }}">View my Commission</a> &nbsp | &nbsp
+            <a href="{{ url_for('b_topcustomer') }}">View Top5 Customers</a> &nbsp | &nbsp
+            <a href="/logout">Log Out</a>
+        </center>
+    </div>
+
+    <!--Show Upcoming flights booking agent bought for customers-->
+    <h1>My Upcoming Flights</h1>
+    {% if flights %}
+    <table>
+      <!--<caption>My Upcoming Flights</caption>-->
+      <tr>
+        <th>Flight Number</th>
+        <th>Airline Name</th>
+        <th>Airplane ID</th>
+        <th>Depature Airport</th>
+        <th>Arrival Airport</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Price</th>
+        <th>Customer Email</th>
+        <th>Ticket Number</th>
+      </tr>
+
+      {% for flight in flights %}
+      <tr>
+        <td>{{flight.flight_num}}</td>
+        <td>{{flight.airline_name}}</td>
+        <td>{{flight.airplane_id}}</td>
+        <td>{{flight.departure_airport}}</td>
+        <td>{{flight.arrival_airport}}</td>
+        <td>{{flight.departure_time}}</td>
+        <td>{{flight.arrival_time}}</td>
+        <td>{{flight.price}}</td>
+        <td>{{flight.customer_email}}
+        <td>{{flight.ticket_id}}</td>
+
+      </tr>
+      {% endfor %}
+    </table>
+
+    {% else %}
+      <h2 style="text-align: center">No Upcoming Flights</h2>
+    {% endif %}
+
+    <p style="text-align: center; color:#525050">To search for specific flights, please click on View My Flights on the top bar</p>
+  </body>
+</html>

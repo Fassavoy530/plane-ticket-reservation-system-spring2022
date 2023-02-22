@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Customer Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="toprow">
+      <a href="{{ url_for('home_page') }}">
+      <img src="static/plane.png" alt="this is a small plane" class = "topimage">
+      </a>
+      <h1 class="topwords">Welcome Customer: {{email}}</h1>
+    </div>
+
+    <div class="links">
+      <center>
+        <a href="{{ url_for('c_home') }}">Home</a> &nbsp | &nbsp
+        <a href="{{ url_for('c_view') }}">View My Flights</a> &nbsp | &nbsp
+        <a href="{{ url_for('c_search_purchase') }}">Search & Purchase Tickets</a> &nbsp | &nbsp
+        <a href="{{ url_for('c_spending') }}">Track My Spending</a> &nbsp | &nbsp
+        <a href="/logout">Log Out</a>
+      </center>
+    </div>
+
+
+    <!--Show Upcoming flights-->
+    <h1 style="text-align: center">Upcoming flights of in the next 30 dyas</h1>
+    {% if flights %}
+    <table>
+      <tr>
+        <th>Flight Number</th>
+        <th>Airline Name</th>
+        <th>Airplane ID</th>
+        <th>Depature Airport</th>
+        <th>Arrival Airport</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Price</th>
+        <th>Ticket Number</th>
+      </tr>
+
+      {% for flight in flights %}
+      <tr>
+        <td>{{flight.flight_num}}</td>
+        <td>{{flight.airline_name}}</td>
+        <td>{{flight.airplane_id}}</td>
+        <td>{{flight.departure_airport}}</td>
+        <td>{{flight.arrival_airport}}</td>
+        <td>{{flight.departure_time}}</td>
+        <td>{{flight.arrival_time}}</td>
+        <td>{{flight.price}}</td>
+        <td>{{flight.ticket_id}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    {% else %}
+      <h2 style="text-align: center">No Upcoming Flights ofin the next 30 days</h2>
+    {% endif %}
+
+    <p style="text-align: center; color:#525050">To search for specific flights, please click on View My Flights on the top bar</p>
+  </body>
+</html>
